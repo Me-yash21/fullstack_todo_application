@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const todoSchema = new mongoose.Schema({
-  createdBy :{
+  createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
@@ -10,21 +10,22 @@ const todoSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  isCompleted:{
+  isCompleted: {
     type: Boolean,
     required: true,
     default: false
   },
-  tags:{
+  tags: {
     type: [String],
-    validate: [tagsValidator,'{PATH} length must be less than 6']
-  } 
-},{
+    validate: [tagsValidator, '{PATH} length must be less than 6']
+  }
+}, {
   timestamps: true
 })
 
-function tagsValidator (values){
-  return values.lenght <=5
+function tagsValidator(values) {
+  return values.lenght <= 5
 }
 
-const Todo = mongoose.Model('Todo',todoSchema);
+const Todo = mongoose.Model('Todo', todoSchema);
+export default Todo

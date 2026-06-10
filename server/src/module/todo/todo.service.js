@@ -59,7 +59,7 @@ const updateTodo = async (userId, todoId, { task, tags }) => {
   }
 
   const updatedTodo = await todo.save();
-  const todoResponse = updateTodo.toObject();
+  const todoResponse = updatedTodo.toObject();
 
   return { todo: todoResponse }
 }

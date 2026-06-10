@@ -9,7 +9,7 @@ export const authenticate = async (req, _, next) => {
 
   let decodedToken;
   try {
-    decodedToken = jwtHelper.verifyAccessToken(token)
+    decodedToken = verifyAccessToken(token)
   } catch (err) {
     if (err.name === "TokenExpiredError")
       throw ApiError.unauthorised("Access Token expired.")

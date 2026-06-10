@@ -24,7 +24,7 @@ const todoSchema = new mongoose.Schema({
 })
 
 function tagsValidator(values) {
-  return values.lenght <= 5
+  return values.length <= 5
 }
 
 const Todo = mongoose.model('Todo', todoSchema);

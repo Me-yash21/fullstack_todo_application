@@ -3,18 +3,18 @@ import ApiError from '../../common/utils/api-error.js'
 import bcrypt from 'bcryptjs'
 import * as jwtHelper from '../../common/utils/jwt-helper.js'
 
-const generateTokensAndSaveRefreshTokenIntoDB = async (userobj) =>{
+const generateTokensAndSaveRefreshTokenIntoDB = async (userObj) =>{
   // here userObj is mongoose document model object. 
   const accessToken = jwtHelper.generateAccessToken({
     id: userObj._id,
-    email: userobj.email
+    email: userObj.email
   })
   const refreshToken = jwtHelper.generateRefreshToken({
-    id:userobj._id
+    id:userObj._id
   })
 
   // save refreshToken into the database.
-  userobj.refreshToken = refreshToken;
+  userObj.refreshToken = refreshToken;
   await userObj.save({
     validateBeforeSave:false
   })
@@ -54,7 +54,7 @@ export const createUserWithEmailAndPassword = async ({fullName,email,password}) 
 
 export const signInUserWithEmailAndPassword = async ({email, password})=>{
   
-  const user = await findUserByEmail(email);
+  const user = await User.findOne({email},"+password");
   if(!user) 
     throw ApiError.badRequest("Email or password is wrong")
 
@@ -65,6 +65,8 @@ export const signInUserWithEmailAndPassword = async ({email, password})=>{
 
   const {accessToken, refreshToken} = await generateTokensAndSaveRefreshTokenIntoDB(user);
   const userResponse = user.toObject();
+  delete userResponse.password;
+  delete userResponse.refreshToken;
 
   return {user:userResponse, accessToken, refreshToken};
 }

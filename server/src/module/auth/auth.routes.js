@@ -11,7 +11,7 @@ router.post('/register',validate(RegisterDto),register)
 router.post('/login',validate(LoginDto),login);
 router.post('/refresh',refresh);
 router.post('/logout',authenticate,logout);
-router.post('/resetPassword',
+router.post('/reset-password',
   authenticate,
   validate(ResetPasswordDto),
   resetPassword

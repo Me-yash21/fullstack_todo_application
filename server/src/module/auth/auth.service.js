@@ -89,7 +89,7 @@ export const refreshTheTokens = async (refreshToken) =>{
     if(err.name === "JsonWebTokenError") 
       throw ApiError.unauthorised("Invalid refresh token.")
 
-    throw ApiError.serverError("")
+    throw ApiError.serverError("Internal server Error.")
   }
 
   const user = await User.findById(decodedToken.id,"+refreshToken");

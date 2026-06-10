@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import {dbName} from '../constant'
+import {dbName} from '../constant/index.js'
 
 export const connectDB = async () =>{
     const mongoDbUri = process.env.MONGODB_URI + `/${dbName}`

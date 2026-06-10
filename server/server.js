@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import app from './src/app.js'
 import { connectDB } from './src/common/config/db.config.js'
 
+dotenv.config()
 
 async function startServer() {
   try {

@@ -27,5 +27,5 @@ function tagsValidator(values) {
   return values.lenght <= 5
 }
 
-const Todo = mongoose.Model('Todo', todoSchema);
+const Todo = mongoose.model('Todo', todoSchema);
 export default Todo

@@ -28,6 +28,18 @@ const login = async (req,res) =>{
 const logout = async (req,res) =>{
   await authService.logOutUser(req.user.id)
 
+  // Web browsers and other compliant clients will only clear the cookie if 
+  // the given options is identical to those given to res.cookie()
+  res.clearCookie("refreshToken",{
+    httpOnly: true,
+    secure: true,
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
+  })
+  res.clearCookie("accessToken",{
+    httpOnly: true,
+    secure: true,
+    maxAge: 1000 * 60 * 60 * 24 // 1 day
+  })
   return ApiResponse.noContent(res,"User logout successfully.")
 }
 
@@ -62,7 +74,7 @@ const resetPassword = async (req,res) =>{
 
   const {user} = await authService.resetPassword(req.user.id,oldPassword,newPassword)
 
-  return ApiResponse.ok(req,"Password reset successfully",{user})
+  return ApiResponse.ok(res,"Password reset successfully",{user})
 }
 
 export {

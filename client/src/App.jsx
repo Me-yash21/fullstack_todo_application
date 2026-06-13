@@ -1,7 +1,9 @@
+import SignupPage from './pages/SignupPage.jsx';
+
 function App() {
   return (
     <>
-      <div className="text-red-500">App</div>
+      <div>App</div>
     </>
   );
 }

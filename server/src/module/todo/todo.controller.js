@@ -23,9 +23,9 @@ const updateTodo = async (req, res) => {
 }
 
 const toggleIsCompleted = async (req, res) => {
-  await todoService.toggleIsCompleted(req.user.id, req.params.id)
+  const { isCompleted } = await todoService.toggleIsCompleted(req.user.id, req.params.id)
 
-  ApiResponse.noContent(res, "Todo toggled successfully.")
+  ApiResponse.ok(res, "Todo toggled successfully.", { isCompleted })
 }
 
 const getUserTodos = async (req, res) => {

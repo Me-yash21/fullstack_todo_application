@@ -28,6 +28,8 @@ const toggleIsCompleted = async (userId, todoId) => {
 
   todo.isCompleted = !todo.isCompleted;
   await todo.save();
+
+  return { isCompleted: todo.isCompleted }
 }
 
 const getUserTodos = async (userId) => {

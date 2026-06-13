@@ -7,8 +7,10 @@ import todoRouter from './module/todo/todo.routes.js'
 
 const app = express();
 
+console.log("frontend Url:- ", process.env.FRONTEND_URL)
 app.use(cors({
-  origin: process.env.NODE_ENV === "production" ? process.env.FRONTEND_URL : "*",
+  origin: process.env.FRONTEND_URL,
+  credentials: true
 }))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

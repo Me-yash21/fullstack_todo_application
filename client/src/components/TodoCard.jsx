@@ -35,7 +35,6 @@ export default function TodoCard({ todo }) {
       });
       const updatedTodo = response.data.todo;
       //update the todo in the todostore
-      console.log('updatedTodo:- ', updatedTodo);
       updateTodoInStore(todo._id, updatedTodo);
       setIsEditing(false);
     } catch (error) {

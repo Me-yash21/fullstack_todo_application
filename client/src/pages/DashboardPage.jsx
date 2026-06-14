@@ -3,6 +3,7 @@ import TodoCard from '../components/TodoCard.jsx';
 import todoServices from '../services/todoServices.js';
 import { useTodoStore } from '../store/todoStore.js';
 import TodoAddDialog from '../components/TodoAddDialog.jsx';
+import Header from '../components/Header.jsx';
 
 export default function DashboardPage() {
   const setTodos = useTodoStore((state) => state.setTodos);
@@ -24,10 +25,11 @@ export default function DashboardPage() {
 
   return isLoading ? (
     <div>
-      <p> Loading....</p>
+      <p> Lod....</p>
     </div>
   ) : (
-    <div>
+    <div className="min-h-screen bg-white flex flex-col">
+      <Header />
       <div className="flex flex-col items-center justify-center">
         <h1 className="font-bold text-2xl mt-9">Todos</h1>
         <div className="flex flex-col items-center justify-center gap-2">

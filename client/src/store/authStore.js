@@ -7,7 +7,10 @@ export const useAuthStore = create()(
     isAuthenticate: false,
     setUser: (user) => set({ user, isAuthenticate: true }),
     unsetUser: () => set({ user: null, isAuthenticate: false })
-  })
+  }),
+    {
+      name: 'auth-store'
+    }
   )
 )
 

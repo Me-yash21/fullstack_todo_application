@@ -6,6 +6,7 @@ import App from './App.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
+import AuthLayout from './components/AuthLayout.jsx';
 
 const router = createBrowserRouter([
   {
@@ -14,15 +15,27 @@ const router = createBrowserRouter([
   },
   {
     path: '/signup',
-    element: <SignupPage />,
+    element: (
+      <AuthLayout authentication={false}>
+        <SignupPage />
+      </AuthLayout>
+    ),
   },
   {
     path: '/login',
-    element: <LoginPage />,
+    element: (
+      <AuthLayout authentication={false}>
+        <LoginPage />
+      </AuthLayout>
+    ),
   },
   {
     path: '/dashboard',
-    element: <DashboardPage />,
+    element: (
+      <AuthLayout authentication>
+        <DashboardPage />
+      </AuthLayout>
+    ),
   },
 ]);
 

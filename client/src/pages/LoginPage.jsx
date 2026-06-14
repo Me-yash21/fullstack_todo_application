@@ -11,6 +11,7 @@ export default function LoginPage() {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const setUserInStore = useAuthStore((state) => state.setUser);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,6 +60,7 @@ export default function LoginPage() {
       const { email, password } = formData;
       const userResponse = await authService.loginUser(email, password);
       // if User logedIn Successsfully then Redirect to home or dashboard page
+      setUserInStore(userResponse.data.user);
       navigate('/dashboard');
     } catch (error) {
       console.error('Signup error:', error);

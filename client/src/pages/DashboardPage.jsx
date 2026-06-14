@@ -32,7 +32,7 @@ export default function DashboardPage() {
         <h1 className="font-bold text-2xl mt-9">Todos</h1>
         <div className="flex flex-col items-center justify-center gap-2">
           {!!todos.length &&
-            todos.map((todo) => <TodoCard key={todo.id} todo={todo} />)}
+            todos.map((todo) => <TodoCard key={todo._id} todo={todo} />)}
         </div>
       </div>
       <TodoAddDialog

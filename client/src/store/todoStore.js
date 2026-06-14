@@ -20,8 +20,9 @@ export const useTodoStore = create()(
       return { todos: [...state.todos] }
     }),
     updateTodo: (todoId, updatedTodo) => set((state) => {
-      const newTodos = state.todos.filter((todo) => todo._id !== todoId);
-      newTodos.push(updatedTodo)
+      const index = state.todos.findIndex((todo) => todo._id === todoId)
+      state.todos[index] = updatedTodo;
+      const newTodos = [...state.todos]
       return {
         todos: newTodos
       }

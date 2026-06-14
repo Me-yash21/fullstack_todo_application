@@ -8,6 +8,8 @@ export default function TodoCard({ todo }) {
   const [task, setTask] = useState(todo.task);
   const toggleTodo = useTodoStore((state) => state.toggleTodo);
   const taskInputRef = useRef(null);
+  const updateTodoInStore = useTodoStore((state) => state.updateTodo);
+  const [isUpdating, setIsUpadating] = useState(false);
 
   const isCompleteToggleHandler = async (e) => {
     // first change state in the frontend and later send the api response.
@@ -25,6 +27,23 @@ export default function TodoCard({ todo }) {
     }
   };
 
+  const saveBtnHandler = async () => {
+    try {
+      setIsUpadating(true);
+      const response = await todoService.updateTodo(todo._id, {
+        task,
+      });
+      const updatedTodo = response.data.todo;
+      //update the todo in the todostore
+      console.log('updatedTodo:- ', updatedTodo);
+      updateTodoInStore(todo._id, updatedTodo);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('something went wrong while updating the todo:- ', error);
+    } finally {
+      setIsUpadating(false);
+    }
+  };
   useEffect(() => {
     if (isEditing && taskInputRef.current) {
       taskInputRef.current.focus();
@@ -72,11 +91,10 @@ export default function TodoCard({ todo }) {
           >
             ✍️
           </button>
+        ) : isUpdating ? (
+          <div class="h-6 w-6 animate-spin rounded-full border-4 border-gray-300 border-t-orange-400"></div>
         ) : (
-          <button
-            onClick={() => setIsEditing(false)}
-            className="cursor-pointer"
-          >
+          <button onClick={saveBtnHandler} className="cursor-pointer save-btn">
             💾
           </button>
         )}

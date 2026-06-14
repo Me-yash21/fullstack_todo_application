@@ -25,7 +25,7 @@ export default function DashboardPage() {
 
   return isLoading ? (
     <div>
-      <p> Lod....</p>
+      <p> Loding....</p>
     </div>
   ) : (
     <div className="min-h-screen bg-white flex flex-col">

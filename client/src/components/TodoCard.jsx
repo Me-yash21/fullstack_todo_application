@@ -9,6 +9,7 @@ export default function TodoCard({ todo }) {
   const toggleTodo = useTodoStore((state) => state.toggleTodo);
   const taskInputRef = useRef(null);
   const updateTodoInStore = useTodoStore((state) => state.updateTodo);
+  const removeTodoInStore = useTodoStore((state) => state.removeTodo);
   const [isUpdating, setIsUpadating] = useState(false);
 
   const isCompleteToggleHandler = async (e) => {
@@ -41,6 +42,17 @@ export default function TodoCard({ todo }) {
       console.error('something went wrong while updating the todo:- ', error);
     } finally {
       setIsUpadating(false);
+    }
+  };
+
+  const deleteBtnHandler = async () => {
+    try {
+      const response = await todoService.deleteTodo(todo._id);
+
+      removeTodoInStore(todo._id);
+      setIsEditing(false);
+    } catch (error) {
+      console.error('something went wrong while deleting the todo:- ', error);
     }
   };
   useEffect(() => {
@@ -98,7 +110,9 @@ export default function TodoCard({ todo }) {
           </button>
         )}
 
-        <button>🗑️</button>
+        <button onClick={deleteBtnHandler} className="cursor-pointer">
+          🗑️
+        </button>
       </div>
     </div>
   );
